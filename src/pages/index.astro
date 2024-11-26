@@ -3,6 +3,10 @@ import Image from "astro/components/Image.astro";
 import Fonts from "@components/Fonts.astro";
 
 import CharlieHS from "../assets/Charles_HS1.jpg";
+import CharSmoke from "../assets/C-2.jpg";
+import CharMug from "../assets/C-3.jpg";
+import CharYears from "../assets/C-4.jpg";
+
 import "@styles/globals.css";
 ---
 
@@ -14,7 +18,7 @@ import "@styles/globals.css";
   </head>
   <body>
     <div
-      class="z-10 absolute w-screen h-screen flex justify-center items-center"
+      class="-z-10 bg-black fixed w-screen h-screen flex justify-center items-center"
     >
       <h1
         class="text-center text-opacity-10 text-[40vh] text-white leading-none pb-0 dm-sans font-extralight"
@@ -23,18 +27,57 @@ import "@styles/globals.css";
       </h1>
     </div>
     <div
-      class="bg-black h-screen w-screen flex flex-row justify-center items-center"
+      class="bg-transparent h-screen w-screen flex flex-row justify-center items-center"
     >
-      <h1
-        class="z-20 text-8xl text-white align-middle mr-10 new-ams w-[15rem] text-right"
-      >
+      <h1 class="text-8xl align-middle mr-10 new-ams w-[15rem] text-right">
         CHARLIE NEEDS HELP
       </h1>
       <Image
         src={CharlieHS}
         alt="charlie"
-        class="z-20 h-96 w-auto shadow-2xl shadow-red-600"
+        class="h-96 w-auto shadow-xl shadow-red-600"
       />
+    </div>
+    <div class="flex flex-col w-screen items-center">
+      <div
+        class="bg-black m-20 p-20 gap-20 w-fit border-2 border-gray-900 shadow-xl shadow-red-900 flex flex-row"
+      >
+        <Image src={CharSmoke} alt="charlie" class="max-w-72 h-auto border-2" />
+        <div class="w-72 flex flex-col justify-center">
+          <h1 class="new-ams text-5xl mb-2 font-bold">CHARLIE NEEDS HELP</h1>
+          <p class="new-ams text-2xl">
+            He has fallen into the 7th circle of nicotine addiction. Being
+            consumed by greed, he'll need all the motivation he can get to kick
+            addiction once and for all.
+          </p>
+        </div>
+      </div>
+      <div
+        class="bg-black m-20 p-20 gap-20 w-fit border-2 border-gray-900 shadow-xl shadow-red-900 flex flex-row"
+      >
+        <div class="w-72 flex flex-col justify-center">
+          <h1 class="new-ams text-5xl mb-2 font-bold">POWER TO THE PEOPLE</h1>
+          <p class="new-ams text-2xl">
+            funds will be raised for those less fortunate. A pool will be earned
+            during the period between December 1st to December 31st, including
+            his own $20 to start. This pool will be sent to __ on the conditions
+            that Charlie quits vaping for the month of January. Otherwise, that
+            same pool will be out of Charlie's own pocket.
+          </p>
+        </div>
+        <Image src={CharMug} alt="charlie" class="max-w-72 h-auto border-2" />
+      </div>
+      <div
+        class="bg-black m-20 p-20 gap-20 w-fit border-2 border-gray-900 shadow-xl shadow-red-900 flex flex-row"
+      >
+        <Image src={CharYears} alt="charlie" class="max-w-72 h-auto border-2" />
+        <div class="w-72 flex flex-col justify-center">
+          <h1 class="new-ams text-5xl mb-2 font-bold">WE NEED YOU</h1>
+          <p class="new-ams text-2xl">
+            Here's the link to the signup. (Instructions)
+          </p>
+        </div>
+      </div>
     </div>
   </body>
 </html>
