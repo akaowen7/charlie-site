@@ -1,6 +1,7 @@
 ---
 import Image from "astro/components/Image.astro";
 import Fonts from "@components/Fonts.astro";
+import Block from "@components/Block.astro";
 
 import CharlieHS from "../assets/Charles_HS1.jpg";
 import CharSmoke from "../assets/C-2.jpg";
@@ -10,40 +11,47 @@ import CharYears from "../assets/C-4.jpg";
 import "@styles/globals.css";
 ---
 
-<!doctype html>
-<html lang="en">
+<script></script>
+
+<html lang="en" class="scrollbar">
   <head>
     <Fonts />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Help Charlie!</title>
   </head>
   <body>
     <div
-      class="-z-10 bg-black fixed w-screen h-screen flex justify-center items-center"
+      class="-z-10 main-bg fixed w-screen h-screen flex justify-center items-center"
     >
       <h1
-        class="text-center text-opacity-10 text-[40vh] text-white leading-none pb-0 dm-sans font-extralight"
+        class="text-center text-opacity-10 text-9xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
       >
         $63.74<br />RAISED
       </h1>
     </div>
+
     <div
-      class="bg-transparent h-screen w-screen flex flex-row justify-center items-center"
+      class="bg-transparent w-screen h-screen flex flex-col-reverse sm:flex-row justify-center items-center"
     >
-      <h1 class="text-8xl align-middle mr-10 new-ams w-[15rem] text-right">
+      <h1
+        class="text-7xl sm:text-8xl align-middle mt-5 sm:mr-10 new-ams w-[15rem] text-center sm:text-right"
+      >
         CHARLIE NEEDS HELP
       </h1>
       <Image
         src={CharlieHS}
         alt="charlie"
-        class="h-96 w-auto shadow-xl shadow-red-600"
+        class="h-80 sm:h-96 w-auto shadow-xl shadow-red-600"
       />
     </div>
     <div class="flex flex-col w-screen items-center">
-      <div
-        class="bg-black m-20 p-20 gap-20 w-fit border-2 border-gray-900 shadow-xl shadow-red-900 flex flex-row"
-      >
-        <Image src={CharSmoke} alt="charlie" class="max-w-72 h-auto border-2" />
-        <div class="w-72 flex flex-col justify-center">
+      <Block>
+        <Image
+          src={CharSmoke}
+          alt="charlie"
+          class="w-full max-w-72 h-auto border-2"
+        />
+        <div class="w-auto sm:w-72 flex flex-col justify-center">
           <h1 class="new-ams text-5xl mb-2 font-bold">CHARLIE NEEDS HELP</h1>
           <p class="new-ams text-2xl">
             He has fallen into the 7th circle of nicotine addiction. Being
@@ -51,11 +59,9 @@ import "@styles/globals.css";
             addiction once and for all.
           </p>
         </div>
-      </div>
-      <div
-        class="bg-black m-20 p-20 gap-20 w-fit border-2 border-gray-900 shadow-xl shadow-red-900 flex flex-row"
-      >
-        <div class="w-72 flex flex-col justify-center">
+      </Block>
+      <Block>
+        <div class="w-auto sm:w-72 flex flex-col justify-center">
           <h1 class="new-ams text-5xl mb-2 font-bold">POWER TO THE PEOPLE</h1>
           <p class="new-ams text-2xl">
             funds will be raised for those less fortunate. A pool will be earned
@@ -65,19 +71,31 @@ import "@styles/globals.css";
             same pool will be out of Charlie's own pocket.
           </p>
         </div>
-        <Image src={CharMug} alt="charlie" class="max-w-72 h-auto border-2" />
-      </div>
-      <div
-        class="bg-black m-20 p-20 gap-20 w-fit border-2 border-gray-900 shadow-xl shadow-red-900 flex flex-row"
-      >
-        <Image src={CharYears} alt="charlie" class="max-w-72 h-auto border-2" />
-        <div class="w-72 flex flex-col justify-center">
+        <Image
+          src={CharMug}
+          alt="charlie"
+          class="w-full max-w-72 h-auto border-2"
+        />
+      </Block>
+      <Block>
+        <Image
+          src={CharYears}
+          alt="charlie"
+          class="w-full max-w-72 h-auto border-2"
+        />
+        <div class="w-auto sm:w-72 flex flex-col justify-center">
           <h1 class="new-ams text-5xl mb-2 font-bold">WE NEED YOU</h1>
           <p class="new-ams text-2xl">
             Here's the link to the signup. (Instructions)
           </p>
         </div>
-      </div>
+      </Block>
     </div>
   </body>
 </html>
+
+<style>
+  .main-bg {
+    background: radial-gradient(#292929, #0c0c0c);
+  }
+</style>

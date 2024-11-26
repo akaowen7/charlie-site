@@ -14,13 +14,10 @@ html {
   color: white;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.example::-webkit-scrollbar {
-  display: none;
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-.example {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+.scrollbar::-webkit-scrollbar {
+  display: none;
 }
