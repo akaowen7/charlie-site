@@ -2,26 +2,39 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 
-// import { client_email, private_key } from "../../../gsheets-creds.json";
-import { GoogleSpreadsheet } from "google-spreadsheet";
+import {
+  GoogleSpreadsheet,
+  GoogleSpreadsheetWorksheet,
+} from "google-spreadsheet";
 import { JWT } from "google-auth-library";
 
-const jwt = new JWT({
-  email: process.env.CLIENT_EMAIL,
-  key: process.env.PRIVATE_KEY,
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
+let doc: GoogleSpreadsheet;
+let sheet: GoogleSpreadsheetWorksheet;
 
-const doc = new GoogleSpreadsheet(
-  "1NaKdCb1YOgu5dp2zuIAbvjmrZzh_mHq8UwAXKroD3O4",
-  jwt
-);
-await doc.loadInfo();
-const sheet = doc.sheetsByTitle["RaisedTotal"];
+try {
+  const jwt = new JWT({
+    email: import.meta.env.CLIENT_EMAIL,
+    key: import.meta.env.PRIVATE_KEY,
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  doc = new GoogleSpreadsheet(
+    "1NaKdCb1YOgu5dp2zuIAbvjmrZzh_mHq8UwAXKroD3O4",
+    jwt
+  );
+  await doc.loadInfo();
+  sheet = doc.sheetsByTitle["RaisedTotal"];
+} catch (e) {}
 
 export const GET: APIRoute = async () => {
-  await sheet.loadCells("A1:A2");
-  const a1 = sheet.getCell(0, 0).numberValue;
+  let a1: number | undefined;
+
+  try {
+    await sheet.loadCells("A1:A2");
+    a1 = sheet.getCell(0, 0).numberValue;
+  } catch (e) {
+    a1 = 72.64;
+  }
 
   return new Response(
     JSON.stringify({

@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 #creds
 gsheets-creds.json
+.vercel
+.env*.local
