@@ -4,6 +4,7 @@ export const prerender = false;
 import Image from "astro/components/Image.astro";
 import Fonts from "@components/Fonts.astro";
 import Block from "@components/Block.astro";
+import { Icon } from "astro-icon/components";
 // import RaisedTotal from "@components/RaisedTotal.astro";
 
 import CharlieHS from "../assets/Charles_HS1.jpg";
@@ -22,19 +23,42 @@ const total = (await response.json()).total;
 <script type="module" define:vars={{ total }}>
   import { CountUp } from "../../node_modules/countup.js";
 
+  let userHasScrolled = false;
+  window.onscroll = () => {
+    userHasScrolled = true;
+
+    const arrow = document.getElementById("scroll-arrow");
+
+    if (arrow && arrow.classList.contains("animate-fadeIn")) {
+      arrow.classList.remove("animate-fadeIn");
+      arrow.classList.add("animate-fadeOut", "opacity-0");
+    }
+  };
+
   const fadeInTitle = () => {
     setTimeout(() => {
       const text = document.getElementById("title-text");
       const img = document.getElementById("title-image");
 
       if (text && img) {
-        text.classList.remove("hidden");
-        text.classList.add("animate-fade");
+        text.classList.remove("opacity-0");
+        text.classList.add("animate-fadeIn");
 
-        img.classList.remove("hidden");
-        img.classList.add("animate-fade");
+        img.classList.remove("opacity-0");
+        img.classList.add("animate-fadeIn");
       }
     }, 500);
+
+    setTimeout(() => {
+      if (!userHasScrolled) {
+        const arrow = document.getElementById("scroll-arrow");
+
+        if (arrow) {
+          arrow.classList.remove("opacity-0");
+          arrow.classList.add("animate-fadeIn");
+        }
+      }
+    }, 1500);
   };
 
   window.onload = function () {
@@ -67,7 +91,7 @@ const total = (await response.json()).total;
     >
       <h1
         id="title-text"
-        class="text-7xl sm:text-8xl align-middle mt-5 sm:mr-10 new-ams w-[15rem] text-center sm:text-right hidden"
+        class="text-7xl sm:text-8xl align-middle mt-5 sm:mr-10 new-ams w-[15rem] text-center sm:text-right opacity-0"
       >
         CHARLIE NEEDS HELP
       </h1>
@@ -75,7 +99,13 @@ const total = (await response.json()).total;
         id="title-image"
         src={CharlieHS}
         alt="charlie"
-        class="h-80 sm:h-96 w-auto shadow-xl shadow-red-600 block hidden"
+        class="h-80 sm:h-96 w-auto shadow-xl shadow-red-600 block opacity-0"
+      />
+      <Icon
+        id="scroll-arrow"
+        name="ic:round-arrow-circle-down"
+        class="absolute bottom-0 mb-4 opacity-0"
+        size={"2.5rem"}
       />
     </div>
     <div class="flex flex-col w-screen items-center">
