@@ -21,7 +21,7 @@ const sheet = doc.sheetsByTitle["RaisedTotal"];
 
 export const GET: APIRoute = async () => {
   await sheet.loadCells("A1:A2");
-  const a1 = sheet.getCell(0, 0).value;
+  const a1 = sheet.getCell(0, 0).numberValue;
 
   return new Response(
     JSON.stringify({

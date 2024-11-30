@@ -1,9 +1,10 @@
 ---
+export const prerender = false;
+
 import Image from "astro/components/Image.astro";
 import Fonts from "@components/Fonts.astro";
 import Block from "@components/Block.astro";
-import RaisedTotal from "@components/RaisedTotal.astro";
-export const prerender = false;
+// import RaisedTotal from "@components/RaisedTotal.astro";
 
 import CharlieHS from "../assets/Charles_HS1.jpg";
 import CharSmoke from "../assets/C-2.jpg";
@@ -11,9 +12,21 @@ import CharMug from "../assets/C-3.jpg";
 import CharYears from "../assets/C-4.jpg";
 
 import "@styles/globals.css";
+
+import { GET } from "../pages/api/donation-total.json.ts";
+
+let response = await GET(Astro);
+const total = (await response.json()).total;
 ---
 
-<script></script>
+<script type="module" define:vars={{ total }}>
+  import { CountUp } from "../../node_modules/countup.js";
+
+  window.onload = function () {
+    var countUp = new CountUp("total", total, { decimalPlaces: 2 });
+    countUp.start();
+  };
+</script>
 
 <html lang="en" class="scrollbar">
   <head>
@@ -25,7 +38,11 @@ import "@styles/globals.css";
     <div
       class="-z-10 main-bg fixed w-screen h-screen flex justify-center items-center"
     >
-      <RaisedTotal />
+      <h1
+        class="text-center text-opacity-10 text-9xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
+      >
+        $<span id="total"></span><br />RAISED
+      </h1>
     </div>
     <div
       class="bg-transparent w-screen h-screen flex flex-col-reverse sm:flex-row justify-center items-center"
