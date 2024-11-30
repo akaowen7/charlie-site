@@ -7,8 +7,8 @@ import { GoogleSpreadsheet } from "google-spreadsheet";
 import { JWT } from "google-auth-library";
 
 const jwt = new JWT({
-  email: client_email,
-  key: private_key,
+  email: process.env.CLIENT_EMAIL ?? client_email,
+  key: process.env.PRIVATE_KEY ?? private_key,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
