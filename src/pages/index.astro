@@ -2,6 +2,8 @@
 import Image from "astro/components/Image.astro";
 import Fonts from "@components/Fonts.astro";
 import Block from "@components/Block.astro";
+import RaisedTotal from "@components/RaisedTotal.astro";
+export const prerender = false;
 
 import CharlieHS from "../assets/Charles_HS1.jpg";
 import CharSmoke from "../assets/C-2.jpg";
@@ -23,13 +25,8 @@ import "@styles/globals.css";
     <div
       class="-z-10 main-bg fixed w-screen h-screen flex justify-center items-center"
     >
-      <h1
-        class="text-center text-opacity-10 text-9xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
-      >
-        $63.74<br />RAISED
-      </h1>
+      <RaisedTotal />
     </div>
-
     <div
       class="bg-transparent w-screen h-screen flex flex-col-reverse sm:flex-row justify-center items-center"
     >

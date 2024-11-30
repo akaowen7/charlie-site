@@ -1,0 +1,13 @@
+---
+export const prerender = false;
+import { GET } from "../pages/api/donation-total.json.ts";
+
+let response = await GET(Astro);
+const data = await response.json();
+---
+
+<h1
+  class="text-center text-opacity-10 text-9xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
+>
+  ${data.total}<br />RAISED
+</h1>
