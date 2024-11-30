@@ -22,8 +22,26 @@ const total = (await response.json()).total;
 <script type="module" define:vars={{ total }}>
   import { CountUp } from "../../node_modules/countup.js";
 
+  const fadeInTitle = () => {
+    setTimeout(() => {
+      const text = document.getElementById("title-text");
+      const img = document.getElementById("title-image");
+
+      if (text && img) {
+        text.classList.remove("hidden");
+        text.classList.add("animate-fade");
+
+        img.classList.remove("hidden");
+        img.classList.add("animate-fade");
+      }
+    }, 500);
+  };
+
   window.onload = function () {
-    var countUp = new CountUp("total", total, { decimalPlaces: 2 });
+    var countUp = new CountUp("total", total, {
+      decimalPlaces: 2,
+      onCompleteCallback: fadeInTitle,
+    });
     countUp.start();
   };
 </script>
@@ -41,21 +59,23 @@ const total = (await response.json()).total;
       <h1
         class="text-center text-opacity-10 text-9xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
       >
-        $<span id="total"></span><br />RAISED
+        $<span id="total">0.00</span><br />RAISED
       </h1>
     </div>
     <div
-      class="bg-transparent w-screen h-screen flex flex-col-reverse sm:flex-row justify-center items-center"
+      class="w-screen h-screen flex flex-col-reverse sm:flex-row justify-center items-center"
     >
       <h1
-        class="text-7xl sm:text-8xl align-middle mt-5 sm:mr-10 new-ams w-[15rem] text-center sm:text-right"
+        id="title-text"
+        class="text-7xl sm:text-8xl align-middle mt-5 sm:mr-10 new-ams w-[15rem] text-center sm:text-right hidden"
       >
         CHARLIE NEEDS HELP
       </h1>
       <Image
+        id="title-image"
         src={CharlieHS}
         alt="charlie"
-        class="h-80 sm:h-96 w-auto shadow-xl shadow-red-600"
+        class="h-80 sm:h-96 w-auto shadow-xl shadow-red-600 block hidden"
       />
     </div>
     <div class="flex flex-col w-screen items-center">
