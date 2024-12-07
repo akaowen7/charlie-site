@@ -24,7 +24,9 @@ try {
   );
   await doc.loadInfo();
   sheet = doc.sheetsByTitle["RaisedTotal"];
-} catch (e) {}
+} catch (e) {
+  console.error(e);
+}
 
 export const GET: APIRoute = async () => {
   let a1: number | undefined;
@@ -34,6 +36,7 @@ export const GET: APIRoute = async () => {
     a1 = sheet.getCell(0, 0).numberValue;
   } catch (e) {
     a1 = 72.64;
+    console.error(e);
   }
 
   return new Response(

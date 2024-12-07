@@ -11,7 +11,4 @@ import icon from "astro-icon";
 export default defineConfig({
   integrations: [tailwind(), icon()],
   output: "hybrid",
-  adapter: vercel({
-    includeFiles: ["./node_modules"],
-  }),
 });
