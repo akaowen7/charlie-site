@@ -14,7 +14,7 @@ let sheet: GoogleSpreadsheetWorksheet;
 try {
   const jwt = new JWT({
     email: import.meta.env.CLIENT_EMAIL,
-    key: import.meta.env.PRIVATE_KEY,
+    key: import.meta.env.PRIVATE_KEY.split(String.raw`\n`).join("\n"),
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
