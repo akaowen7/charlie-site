@@ -5,7 +5,6 @@ import Image from "astro/components/Image.astro";
 import Fonts from "@components/Fonts.astro";
 import Block from "@components/Block.astro";
 import { Icon } from "astro-icon/components";
-// import RaisedTotal from "@components/RaisedTotal.astro";
 
 import CharlieHS from "../assets/Charles_HS1.jpg";
 import CharSmoke from "../assets/C-2.jpg";
@@ -21,8 +20,6 @@ const total = (await response.json()).total;
 ---
 
 <script type="module" define:vars={{ total }}>
-  import { CountUp } from "../../node_modules/countup.js";
-
   let userHasScrolled = false;
   window.onscroll = () => {
     userHasScrolled = true;
@@ -47,7 +44,7 @@ const total = (await response.json()).total;
         img.classList.remove("opacity-0");
         img.classList.add("animate-fadeIn");
       }
-    }, 500);
+    }, 750);
 
     setTimeout(() => {
       if (!userHasScrolled) {
@@ -61,12 +58,49 @@ const total = (await response.json()).total;
     }, 2500);
   };
 
+  const formatDollarNum = (num) => {
+    let [whole, dec] = num.includes(".") ? num.split(".") : [num, ""];
+
+    if (dec.length == 0) {
+      dec = "00";
+    } else if (dec.length == 1) {
+      dec += "0";
+    } else {
+      dec = dec.substring(0, 2);
+    }
+
+    return `${whole}.${dec}`;
+  };
+
+  const interpolatedArray = (end) => {
+    const size = 70;
+    let arr = [];
+    for (let i = 0; i < size - 1; i++) {
+      const num = ((end / size) * i).toString();
+      arr.push(formatDollarNum(num));
+    }
+    arr.push(formatDollarNum(end.toString()));
+    return arr;
+  };
+
+  const totalElem = document.getElementById("total");
+
   window.onload = function () {
-    var countUp = new CountUp("total", total, {
-      decimalPlaces: 2,
-      onCompleteCallback: fadeInTitle,
-    });
-    countUp.start();
+    if (totalElem) {
+      const nums = interpolatedArray(total);
+      console.log(nums);
+
+      const intervalID = setInterval(() => {
+        const num = nums.shift();
+        if (!num) {
+          clearInterval(intervalID);
+          fadeInTitle();
+          return;
+        }
+
+        totalElem.innerHTML = num;
+      }, 20);
+    }
   };
 </script>
 
