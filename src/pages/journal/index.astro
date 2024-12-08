@@ -1,0 +1,69 @@
+---
+import Basic from "@layouts/Basic.astro";
+import Block from "@components/Block.astro";
+---
+
+<script>
+  const daysLeft = 27;
+
+  const interpolatedArray = (end: number) => {
+    const size = end;
+    let arr = [];
+    for (let i = 0; i < size - 1; i++) {
+      const num = Math.ceil((end / size) * i).toString();
+      arr.push(num);
+    }
+    arr.push(end.toString());
+    return arr;
+  };
+
+  const totalElem = document.getElementById("days");
+
+  window.onload = function () {
+    if (totalElem) {
+      const nums = interpolatedArray(daysLeft);
+      console.log(nums);
+
+      const intervalID = setInterval(() => {
+        const num = nums.shift();
+        if (!num) {
+          clearInterval(intervalID);
+          return;
+        }
+
+        totalElem.innerHTML = num;
+      }, 30);
+    }
+  };
+</script>
+
+<Basic title="Terms and Conditions" description="Terms and Conditions">
+  <div
+    class="-z-10 main-bg fixed w-screen h-screen flex justify-center items-center"
+  >
+    <h1
+      class="text-center text-opacity-10 text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
+    >
+      <div class="block"><span id="days">27</span> DAYS<br />LEFT</div>
+    </h1>
+  </div>
+  <div
+    class="min-w-screen min-h-screen flex flex-col justify-center items-center text-black p-5"
+  >
+    <Block>
+      <p class="new-ams text-2xl">This is a journal entry</p>
+    </Block>
+    <Block>
+      <p class="new-ams text-2xl">This is a journal entry</p>
+    </Block>
+    <Block>
+      <p class="new-ams text-2xl">This is a journal entry</p>
+    </Block>
+  </div>
+</Basic>
+
+<style>
+  .main-bg {
+    background: radial-gradient(#cf0000, #850000);
+  }
+</style>
