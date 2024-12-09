@@ -5,13 +5,12 @@ interface Props {
 
 const { black } = Astro.props;
 var colours = black
-  ? "bg-black border-2 shadow-xl border-gray-900 shadow-red-900"
-  : "bg-white border-2 shadow-xl border-gray-300 shadow-slate-600";
+  ? "bg-black border-2 shadow-xl border-gray-900 shadow-red-900 m-8 mb-16 sm:m-20 p-6 sm:p-20 w-fit"
+  : "bg-white shadow-xl shadow-slate-600 p-6 sm:p-10 w-full";
 ---
 
 <div
-  class={colours +
-    " m-8 mb-16 sm:m-20 p-6 sm:p-20 gap-5 sm:gap-20 w-fit flex flex-col sm:flex-row items-center"}
+  class={colours + " gap-5 sm:gap-20 flex flex-col sm:flex-row items-center"}
 >
   <slot />
 </div>

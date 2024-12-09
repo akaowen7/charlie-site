@@ -1,6 +1,10 @@
 ---
 import Basic from "@layouts/Basic.astro";
 import Block from "@components/Block.astro";
+
+import "@styles/markdown.css";
+
+const entries = await Astro.glob("../../assets/journal-entries/*.md");
 ---
 
 <script>
@@ -28,6 +32,15 @@ import Block from "@components/Block.astro";
         const num = nums.shift();
         if (!num) {
           clearInterval(intervalID);
+          
+          setTimeout(() => {
+            const title = document.getElementById("title");
+
+            if (title) {
+              title.classList.remove("opacity-0");
+              title.classList.add("animate-fadeIn");
+            }
+          }, 750);
           return;
         }
 
@@ -37,28 +50,45 @@ import Block from "@components/Block.astro";
   };
 </script>
 
-<Basic title="Terms and Conditions" description="Terms and Conditions">
+<Basic title="Journal" description="Cataloging the harrowing journey">
   <div
     class="-z-10 main-bg fixed w-screen h-screen flex justify-center items-center"
   >
     <h1
-      class="text-center text-opacity-10 text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
+      class="text-center text-opacity-20 max-w-full text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
     >
-      <div class="block"><span id="days">27</span> DAYS<br />LEFT</div>
+      <div class="block"><span id="days">27</span> DAYS LEFT</div>
     </h1>
   </div>
   <div
-    class="min-w-screen min-h-screen flex flex-col justify-center items-center text-black p-5"
+    class="min-w-screen min-h-screen flex flex-col justify-center items-center text-black p-5 sm:p-10 new-ams"
   >
-    <Block>
-      <p class="new-ams text-2xl">This is a journal entry</p>
-    </Block>
-    <Block>
-      <p class="new-ams text-2xl">This is a journal entry</p>
-    </Block>
-    <Block>
-      <p class="new-ams text-2xl">This is a journal entry</p>
-    </Block>
+    <div class="w-full sm:w-3/4">
+      <div class="opacity-0" id="title">
+        <div class="mb-[-.5rem] flex flex-row mt-[45vh] sm:mt-[41vh] md:mt-[38vh]">
+          <div
+            class="ml-[1.625rem] bg-white rounded-full h-8 w-8 self-end"
+          >
+          </div>
+          <h1 class="mx-auto sm:mb-[-1rem] md:mb-[-1.8rem] pr-[3.625rem] text-white text-4xl sm:text-6xl md:text-8xl">THE JOURNAL</h1>
+        </div>
+        <div
+          class="ml-10 h-[49vh] w-1 bg-white"
+        ></div>
+      </div>
+      {entries.map((entry) =>
+        <div class="h-20 pl-10">
+          <div
+            class="border-l-4 border-white h-full text-white pl-4 flex"
+          >
+            <h1 class="self-end text-4xl">{entry.frontmatter.date}</h1>
+          </div>
+        </div>
+        <div class="z-10 bg-white shadow-xl shadow-gray-700 p-6 sm:p-10 w-full markdown">
+          <entry.Content />
+        </div>
+      )}
+    </div>
   </div>
 </Basic>
 
