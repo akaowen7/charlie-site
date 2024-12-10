@@ -1,16 +1,5 @@
----
-interface Props {
-  black?: boolean;
-}
-
-const { black } = Astro.props;
-var colours = black
-  ? "bg-black border-2 shadow-xl border-gray-900 shadow-red-900 m-8 mb-16 sm:m-20 p-6 sm:p-20 w-fit"
-  : "bg-white shadow-xl shadow-slate-600 p-6 sm:p-10 w-full";
----
-
 <div
-  class={colours + " gap-5 sm:gap-20 flex flex-col sm:flex-row items-center"}
+  class="bg-black border-2 shadow-xl border-gray-900 shadow-red-900 m-8 mb-16 sm:m-20 p-6 sm:p-20 w-fit gap-5 sm:gap-20 flex flex-col sm:flex-row items-center"
 >
   <slot />
 </div>

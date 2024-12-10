@@ -102,9 +102,37 @@ const total = (await response.json()).total;
   };
 </script>
 
+<script>
+  const ToJournal = () => {
+    const bg = document.getElementById("bg");
+    const content = document.getElementById("content");
+
+    if (bg && content) {
+      bg.classList.add("bg-fade-out");
+      content.classList.add("content-fade-out");
+
+      setTimeout(() => {
+        window.location.href = "/journal";
+      }, 1000);
+    } else {
+      window.location.href = "/journal";
+    }
+  };
+
+  addEventListener("click", ToJournal);
+</script>
+
 <Basic title="Charlie Needs Help" description="Charlie Needs Help">
+  <!-- Faux bg, behind for transitions -->
+  <div
+    class="-z-20 journal-bg fixed w-screen h-screen flex justify-center items-center"
+  >
+  </div>
+
+  <!-- Actual background -->
   <div
     class="-z-10 main-bg fixed w-screen h-screen flex justify-center items-center"
+    id="bg"
   >
     <h1
       class="text-center text-opacity-10 text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
@@ -112,99 +140,127 @@ const total = (await response.json()).total;
       $<span id="total">0.00</span><br />RAISED
     </h1>
   </div>
-  <div
-    class="w-screen h-screen flex flex-col-reverse sm:flex-row justify-center items-center"
-  >
-    <h1
-      id="title-text"
-      class="text-7xl sm:text-8xl align-middle mt-5 sm:mr-10 new-ams w-[15rem] text-center sm:text-right opacity-0"
+
+  <!-- Title -->
+  <div id="content">
+    <div
+      class="w-screen h-screen flex flex-col-reverse sm:flex-row justify-center items-center"
     >
-      CHARLIE NEEDS HELP
-    </h1>
-    <Image
-      id="title-image"
-      src={CharlieHS}
-      alt="charlie"
-      class="h-80 sm:h-96 w-auto shadow-xl shadow-red-600 block opacity-0"
-    />
-    <Icon
-      id="scroll-arrow"
-      name="ic:round-arrow-circle-down"
-      class="absolute bottom-0 mb-4 opacity-0"
-      size={"2.5rem"}
-    />
-  </div>
-  <div class="flex flex-col w-screen items-center">
-    <Block black={true}>
+      <h1
+        id="title-text"
+        class="text-7xl sm:text-8xl align-middle mt-5 sm:mr-10 new-ams w-[15rem] text-center sm:text-right opacity-0"
+      >
+        CHARLIE NEEDS HELP
+      </h1>
       <Image
-        src={CharSmoke}
+        id="title-image"
+        src={CharlieHS}
         alt="charlie"
-        class="w-full max-w-72 h-auto border-2"
+        class="h-80 sm:h-96 w-auto shadow-xl shadow-red-600 block opacity-0"
       />
-      <div class="w-auto sm:w-72 flex flex-col justify-center">
-        <h1 class="new-ams text-5xl mb-2 font-bold">CHARLIE NEEDS HELP</h1>
-        <p class="new-ams text-2xl">
-          He has fallen into the 7th circle of nicotine addiction. Being
-          consumed by greed, he'll need all the motivation he can get to kick
-          addiction once and for all.
-        </p>
-      </div>
-    </Block>
-    <Block black={true}>
-      <div class="w-auto sm:w-72 flex flex-col justify-center">
-        <h1 class="new-ams text-5xl mb-2 font-bold">POWER TO THE PEOPLE</h1>
-        <p class="new-ams text-2xl">
-          funds will be raised for those less fortunate. A pool will be earned
-          during the period between December 1st to December 31st, including his
-          own $20 to start. This pool will be sent to
-          <a
-            class="text-blue-600 hover:underline cursor-pointer"
-            href="https://lungcancercanada.ca/"
-            >Lung Cancer Canada
-          </a>
-          on the conditions that Charlie quits vaping for the month of January. Otherwise,
-          that same pool will be out of Charlie's own pocket.
-        </p>
-      </div>
-      <Image
-        src={CharMug}
-        alt="charlie"
-        class="w-full max-w-72 h-auto border-2"
+      <Icon
+        id="scroll-arrow"
+        name="ic:round-arrow-circle-down"
+        class="absolute bottom-0 mb-4 opacity-0"
+        size={"2.5rem"}
       />
-    </Block>
-    <Block black={true}>
-      <Image
-        src={CharYears}
-        alt="charlie"
-        class="w-full max-w-72 h-auto border-2"
-      />
-      <div class="w-auto sm:w-72 flex flex-col justify-center">
-        <h1 class="new-ams text-5xl mb-2 font-bold">WE NEED YOU</h1>
-        <p class="new-ams text-2xl">
-          The website is officially open for Dember 10th.
-          <a
-            class="text-blue-600 hover:underline cursor-pointer"
-            href="https://forms.gle/zwxED8TaNEbghGDr6"
-            >The link for donation sign ups is open.
-          </a>
-          The bets will be signed until December 31st. Charlie will officially quit
-          January 1st, and the process will be documented until January 31st (with
-          a journal to be added). On that same day, if Charlie makes it through the
-          month, donations will be collected by those that signed. Otherwise, he
-          pays the funds out of pocket.
-          <a
-            class="text-blue-600 hover:underline cursor-pointer"
-            href="/terms-and-conditions"
-            >Terms and conditions
-          </a>
-        </p>
-      </div>
-    </Block>
+      <!-- <span onclick="ToJournal()">ToJournal</span> -->
+    </div>
+
+    <!-- Content -->
+    <div class="flex flex-col w-screen items-center">
+      <Block>
+        <Image
+          src={CharSmoke}
+          alt="charlie"
+          class="w-full max-w-72 h-auto border-2"
+        />
+        <div class="w-auto sm:w-72 flex flex-col justify-center">
+          <h1 class="new-ams text-5xl mb-2 font-bold">CHARLIE NEEDS HELP</h1>
+          <p class="new-ams text-2xl">
+            He has fallen into the 7th circle of nicotine addiction. Being
+            consumed by greed, he'll need all the motivation he can get to kick
+            addiction once and for all.
+          </p>
+        </div>
+      </Block>
+      <Block>
+        <div class="w-auto sm:w-72 flex flex-col justify-center">
+          <h1 class="new-ams text-5xl mb-2 font-bold">POWER TO THE PEOPLE</h1>
+          <p class="new-ams text-2xl">
+            funds will be raised for those less fortunate. A pool will be earned
+            during the period between December 1st to December 31st, including
+            his own $20 to start. This pool will be sent to
+            <a
+              class="text-blue-600 hover:underline cursor-pointer"
+              href="https://lungcancercanada.ca/"
+              >Lung Cancer Canada
+            </a>
+            on the conditions that Charlie quits vaping for the month of January.
+            Otherwise, that same pool will be out of Charlie's own pocket.
+          </p>
+        </div>
+        <Image
+          src={CharMug}
+          alt="charlie"
+          class="w-full max-w-72 h-auto border-2"
+        />
+      </Block>
+      <Block>
+        <Image
+          src={CharYears}
+          alt="charlie"
+          class="w-full max-w-72 h-auto border-2"
+        />
+        <div class="w-auto sm:w-72 flex flex-col justify-center">
+          <h1 class="new-ams text-5xl mb-2 font-bold">WE NEED YOU</h1>
+          <p class="new-ams text-2xl">
+            The website is officially open for Dember 10th.
+            <a
+              class="text-blue-600 hover:underline cursor-pointer"
+              href="https://forms.gle/zwxED8TaNEbghGDr6"
+              >The link for donation sign ups is open.
+            </a>
+            The bets will be signed until December 31st. Charlie will officially
+            quit January 1st, and the process will be documented until January 31st
+            (with a journal to be added). On that same day, if Charlie makes it through
+            the month, donations will be collected by those that signed. Otherwise,
+            he pays the funds out of pocket.
+            <a
+              class="text-blue-600 hover:underline cursor-pointer"
+              href="/terms-and-conditions"
+              >Terms and conditions
+            </a>
+          </p>
+        </div>
+      </Block>
+    </div>
   </div>
 </Basic>
 
 <style>
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
   .main-bg {
     background: radial-gradient(#292929, #0c0c0c);
+  }
+
+  .journal-bg {
+    background: radial-gradient(#cf0000, #850000);
+  }
+
+  .bg-fade-out {
+    animation: fade-out 1s forwards;
+  }
+
+  .content-fade-out {
+    animation: fade-out 0.5s forwards;
   }
 </style>

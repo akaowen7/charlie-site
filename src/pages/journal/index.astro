@@ -10,6 +10,17 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
 <script>
   const daysLeft = 27;
 
+  const fadeInTitle = () => {
+    setTimeout(() => {
+      const collection = document.getElementsByClassName("bring-in");
+
+      for (let i = 0; i < collection.length; i++) {
+        collection[i].classList.remove("opacity-0");
+        collection[i].classList.add("animate-fadeIn");
+      }
+    }, 750);
+  };
+
   const interpolatedArray = (end: number) => {
     const size = end;
     let arr = [];
@@ -33,14 +44,7 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
         if (!num) {
           clearInterval(intervalID);
           
-          setTimeout(() => {
-            const title = document.getElementById("title");
-
-            if (title) {
-              title.classList.remove("opacity-0");
-              title.classList.add("animate-fadeIn");
-            }
-          }, 750);
+          fadeInTitle();
           return;
         }
 
@@ -50,6 +54,10 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
   };
 </script>
 
+<script>
+
+</script>
+
 <Basic title="Journal" description="Cataloging the harrowing journey">
   <div
     class="-z-10 main-bg fixed w-screen h-screen flex justify-center items-center"
@@ -57,32 +65,32 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
     <h1
       class="text-center text-opacity-20 max-w-full text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
     >
-      <div class="block"><span id="days">27</span> DAYS LEFT</div>
+      <div class="block"><span id="days">27</span> DAYS UNTIL</div>
     </h1>
   </div>
   <div
-    class="min-w-screen min-h-screen flex flex-col justify-center items-center text-black p-5 sm:p-10 new-ams"
+    class="min-w-screen min-h-screen flex flex-col justify-center items-center text-black px-5 sm:px-10 new-ams"
   >
-    <div class="w-full sm:w-3/4">
-      <div class="opacity-0" id="title">
-        <div class="mb-[-.5rem] flex flex-row mt-[45vh] sm:mt-[41vh] md:mt-[38vh]">
+    <div class="w-full md:w-3/4">
+      <div class="opacity-0 bring-in flex flex-col justify-end h-screen" id="title-s">
+        <div class="flex flex-row items-center h-20 mb-[-2.5rem]">
           <div
-            class="ml-[1.625rem] bg-white rounded-full h-8 w-8 self-end"
+            class="ml-[1.625rem] bg-white rounded-full h-8 w-8 min-w-8"
           >
           </div>
-          <h1 class="mx-auto sm:mb-[-1rem] md:mb-[-1.8rem] pr-[3.625rem] text-white text-4xl sm:text-6xl md:text-8xl">THE JOURNAL</h1>
+          <h1 class="mx-auto pr-[3.625rem] text-white text-5xl md:text-7xl lg:text-8xl text-center">THE JOURNAL</h1>
         </div>
         <div
-          class="ml-10 h-[49vh] w-1 bg-white"
+          class="ml-10 h-[50vh] w-1 bg-white"
         ></div>
       </div>
       {entries.map((entry) =>
-        <div class="h-20 pl-10">
+        <div class="h-20 pl-10 flex">
           <div
-            class="border-l-4 border-white h-full text-white pl-4 flex"
+            class="opacity-0 bring-in border-l-4 border-white h-full pl-4"
           >
-            <h1 class="self-end text-4xl">{entry.frontmatter.date}</h1>
           </div>
+          <h1 class="self-end text-4xl text-white">{entry.frontmatter.date}</h1>
         </div>
         <div class="z-10 bg-white shadow-xl shadow-gray-700 p-6 sm:p-10 w-full markdown">
           <entry.Content />
