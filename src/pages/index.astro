@@ -4,6 +4,7 @@ export const prerender = false;
 import Image from "astro/components/Image.astro";
 import Block from "@components/Block.astro";
 import Basic from "@layouts/Basic.astro";
+import NavBar from "@components/NavBar.astro";
 import { Icon } from "astro-icon/components";
 
 import CharlieHS from "../assets/Charles_HS1.jpg";
@@ -24,9 +25,9 @@ const total = (await response.json()).total;
 
     const arrow = document.getElementById("scroll-arrow");
 
-    if (arrow && arrow.classList.contains("animate-fadeIn")) {
-      arrow.classList.remove("animate-fadeIn");
-      arrow.classList.add("animate-fadeOut", "opacity-0");
+    if (arrow && arrow.classList.contains("animate-fade-in-1")) {
+      arrow.classList.remove("animate-fade-in-1");
+      arrow.classList.add("animate-fade-out-1", "opacity-0");
     }
   };
 
@@ -36,11 +37,8 @@ const total = (await response.json()).total;
       const img = document.getElementById("title-image");
 
       if (text && img) {
-        text.classList.remove("opacity-0");
-        text.classList.add("animate-fadeIn");
-
-        img.classList.remove("opacity-0");
-        img.classList.add("animate-fadeIn");
+        text.classList.add("animate-fade-in-1");
+        img.classList.add("animate-fade-in-1");
       }
     }, 750);
 
@@ -49,8 +47,7 @@ const total = (await response.json()).total;
         const arrow = document.getElementById("scroll-arrow");
 
         if (arrow) {
-          arrow.classList.remove("opacity-0");
-          arrow.classList.add("animate-fadeIn");
+          arrow.classList.add("animate-fade-in-1");
         }
       }
     }, 2500);
@@ -100,16 +97,14 @@ const total = (await response.json()).total;
       }, 20);
     }
   };
-</script>
 
-<script>
-  const ToJournal = () => {
+  function ToJournal() {
     const bg = document.getElementById("bg");
     const content = document.getElementById("content");
 
     if (bg && content) {
-      bg.classList.add("bg-fade-out");
-      content.classList.add("content-fade-out");
+      bg.classList.add("animate-fade-out-1");
+      content.classList.add("animate-fade-out-.5");
 
       setTimeout(() => {
         window.location.href = "/journal";
@@ -117,10 +112,12 @@ const total = (await response.json()).total;
     } else {
       window.location.href = "/journal";
     }
-  };
+  }
 
-  addEventListener("click", ToJournal);
+  document.getElementById("Journal").onclick = ToJournal;
 </script>
+
+<script></script>
 
 <Basic title="Charlie Needs Help" description="Charlie Needs Help">
   <!-- Faux bg, behind for transitions -->
@@ -135,14 +132,16 @@ const total = (await response.json()).total;
     id="bg"
   >
     <h1
-      class="text-center text-opacity-10 text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
+      class="animate-fade-in-.5 text-center text-opacity-10 text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
     >
       $<span id="total">0.00</span><br />RAISED
     </h1>
   </div>
 
-  <!-- Title -->
+  <!-- <NavBar buttons={["Journal"]} /> -->
+
   <div id="content">
+    <!-- Title -->
     <div
       class="w-screen h-screen flex flex-col-reverse sm:flex-row justify-center items-center"
     >
@@ -164,7 +163,6 @@ const total = (await response.json()).total;
         class="absolute bottom-0 mb-4 opacity-0"
         size={"2.5rem"}
       />
-      <!-- <span onclick="ToJournal()">ToJournal</span> -->
     </div>
 
     <!-- Content -->
@@ -237,30 +235,3 @@ const total = (await response.json()).total;
     </div>
   </div>
 </Basic>
-
-<style>
-  @keyframes fade-out {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .main-bg {
-    background: radial-gradient(#292929, #0c0c0c);
-  }
-
-  .journal-bg {
-    background: radial-gradient(#cf0000, #850000);
-  }
-
-  .bg-fade-out {
-    animation: fade-out 1s forwards;
-  }
-
-  .content-fade-out {
-    animation: fade-out 0.5s forwards;
-  }
-</style>

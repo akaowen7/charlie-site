@@ -1,6 +1,6 @@
 ---
 import Basic from "@layouts/Basic.astro";
-import Block from "@components/Block.astro";
+import NavBar from "@components/NavBar.astro";
 
 import "@styles/markdown.css";
 
@@ -15,8 +15,7 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
       const collection = document.getElementsByClassName("bring-in");
 
       for (let i = 0; i < collection.length; i++) {
-        collection[i].classList.remove("opacity-0");
-        collection[i].classList.add("animate-fadeIn");
+        collection[i].classList.add("animate-fade-in-1");
       }
     }, 750);
   };
@@ -54,20 +53,19 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
   };
 </script>
 
-<script>
-
-</script>
-
 <Basic title="Journal" description="Cataloging the harrowing journey">
   <div
-    class="-z-10 main-bg fixed w-screen h-screen flex justify-center items-center"
+    class="-z-10 journal-bg fixed w-screen h-screen flex justify-center items-center"
   >
     <h1
-      class="text-center text-opacity-20 max-w-full text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
+      class="animate-fade-in-.5 text-center text-opacity-20 max-w-full text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
     >
       <div class="block"><span id="days">27</span> DAYS UNTIL</div>
     </h1>
   </div>
+
+  <NavBar buttons={["Home"]} />
+
   <div
     class="min-w-screen min-h-screen flex flex-col justify-center items-center text-black px-5 sm:px-10 new-ams"
   >
@@ -99,9 +97,3 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
     </div>
   </div>
 </Basic>
-
-<style>
-  .main-bg {
-    background: radial-gradient(#cf0000, #850000);
-  }
-</style>

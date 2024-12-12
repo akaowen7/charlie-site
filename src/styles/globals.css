@@ -21,3 +21,28 @@ body {
 .scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* @keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+} */
+
+.main-bg {
+  background: radial-gradient(#292929, #0c0c0c);
+}
+
+.journal-bg {
+  background: radial-gradient(#cf0000, #850000);
+}
+
+/* .bg-fade-out {
+  animation: fade-out 1s forwards;
+}
+
+.content-fade-out {
+  animation: fade-out 0.5s forwards;
+} */

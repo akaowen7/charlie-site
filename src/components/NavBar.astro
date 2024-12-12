@@ -1,0 +1,24 @@
+---
+interface Props {
+  buttons: string[];
+}
+
+const { buttons } = Astro.props;
+---
+
+<div
+  class="bg-black bg-opacity-20 fixed right-0 h-screen flex flex-col justify-center items-center"
+  id="nav"
+>
+  {
+    buttons.map((button) => (
+      <button
+        class="[writing-mode:vertical-rl] new-ams text-4xl bg-black p-3 m-3 rounded-lg
+        transition duration-300 ease-in-out bg-opacity-0 hover:bg-opacity-80"
+        id={button}
+      >
+        {button}
+      </button>
+    ))
+  }
+</div>

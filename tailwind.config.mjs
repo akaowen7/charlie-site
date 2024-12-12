@@ -6,18 +6,20 @@ export default {
   theme: {
     extend: {
       animation: {
-        fadeIn: "fadeInK 1s ease-in-out",
-        fadeOut: "fadeOutK 1s ease-in-out",
+        "fade-in-1": "fade-in-keys 1s ease-in-out forwards",
+        "fade-out-1": "fade-out-keys 1s ease-in-out forwards",
+        "fade-in-.5": "fade-in-keys .5s ease-in-out forwards",
+        "fade-out-.5": "fade-out-keys .5s ease-in-out forwards",
       },
 
       // that is actual animation
       keyframes: () => ({
-        fadeInK: {
+        "fade-in-keys": {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
         },
 
-        fadeOutK: {
+        "fade-out-keys": {
           "0%": { opacity: 1 },
           "100%": { opacity: 0 },
         },
