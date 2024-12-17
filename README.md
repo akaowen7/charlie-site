@@ -4,11 +4,11 @@ Site for Charlie so he stops vaping
 
 # Journal Entries
 
-Entries are in `src/assets/journal-entries`, they are markdown files. They are displayed on the `/journal` page, which is currently hidden, but you can see it by just navigating to the url directly. The name of the files don't matter, as long as they are `.md`, however the name of the files will decide which order the entries are showed in (`1.md` will be before `2.md`), so I suggest just numbering them. I have a `1.md` file already made, feel free to change the contents of it.
+Entries are in [`src/assets/journal-entries`](src/assets/journal-entries), they are markdown files. They are displayed on the `/journal` page, which is currently hidden, but you can see it by just navigating to the url directly. The name of the files don't matter, as long as they are `.md`, however the name of the files will decide which order the entries are showed in (`1.md` will be before `2.md`), so I suggest just numbering them. I have a `1.md` file already made, feel free to change the contents of it.
 
 ## What is Markdown
 
-It's a markup language for formatting documents. [Heres an introduction on the syntax](https://www.markdownguide.org/basic-syntax/). You can look at the `.md` files in `src/pages/journal-example` and see how they are displayed on [`/journal-example`](https://charlieneedshelp.com/journal-example). (this is a hidden page just for you to reference, make sure you put your actual entries in `src/assets/journal-entries`)
+It's a markup language for formatting documents. [Heres an introduction on the syntax](https://www.markdownguide.org/basic-syntax/). You can look at the `.md` files in [`src/pages/journal-example`](src/pages/journal-example) and see how they are displayed on the [`/journal-example`](https://charlieneedshelp.com/journal-example) page. (this is a hidden page just for you to reference, make sure you put your actual entries in `src/assets/journal-entries`)
 
 ## Creating an Entry
 
