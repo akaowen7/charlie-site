@@ -4,7 +4,7 @@ Site for Charlie so he stops vaping
 
 # Journal Entries
 
-Entries are in [`src/assets/journal-entries`](src/assets/journal-entries), they are markdown files. They are displayed on the `/journal` page, which is currently hidden, but you can see it by just navigating to the url directly. The name of the files don't matter, as long as they are `.md`, however the name of the files will decide which order the entries are showed in (`1.md` will be before `2.md`), so I suggest just numbering them. I have a `1.md` file already made, feel free to change the contents of it.
+Entries are in [`src/assets/journal-entries`](src/assets/journal-entries), they are markdown files (if you look at them in github, select the "code" view to see what the actuall file looks like). They are displayed on the `/journal` page, which is currently hidden, but you can see it by just navigating to the url directly. The name of the files don't matter, as long as they are `.md`, however the name of the files will decide which order the entries are showed in (`1.md` will be before `2.md`), so I suggest just numbering them. I have a `1.md` file already made, feel free to change the contents of it.
 
 ## What is Markdown
 
