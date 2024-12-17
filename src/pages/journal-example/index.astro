@@ -3,12 +3,35 @@ import Basic from "@layouts/Basic.astro";
 import NavBar from "@components/NavBar.astro";
 
 import "@styles/markdown.css";
+import Footer from "@components/Footer.astro";
 
 const entries = await Astro.glob("./*.md");
 ---
 
 <script>
-  const daysLeft = 27;
+  var daysLeft = 1;
+  const today = new Date();
+  const starts = new Date("2025-01-01");
+  const ends = new Date("2025-02-01");
+
+  const restOfTitle = document.getElementById("restOfTitle");
+
+  if (today < starts && restOfTitle) {
+    console.log((starts.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+    daysLeft = Math.ceil((starts.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+
+    if (daysLeft <= 1) restOfTitle.innerHTML = "DAY UNTIL";
+  }
+  else if (today < ends && restOfTitle) {
+    console.log((ends.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+    daysLeft = Math.ceil((ends.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+
+    restOfTitle.innerHTML = daysLeft <= 1 ? "DAY REMAINS" : "DAYS REMAIN";
+  }
+  else if (restOfTitle) {
+    daysLeft = 0;
+    restOfTitle.innerHTML = "IT IS<br/>OVER";
+  }
 
   const fadeInTitle = () => {
     setTimeout(() => {
@@ -23,7 +46,7 @@ const entries = await Astro.glob("./*.md");
   const interpolatedArray = (end: number) => {
     const size = end;
     let arr = [];
-    for (let i = 0; i < size - 1; i++) {
+    for (let i = 0; i < size; i++) {
       const num = Math.ceil((end / size) * i).toString();
       arr.push(num);
     }
@@ -34,42 +57,80 @@ const entries = await Astro.glob("./*.md");
   const totalElem = document.getElementById("days");
 
   window.onload = function () {
-    if (totalElem) {
+    if (totalElem && daysLeft > 0) {
       const nums = interpolatedArray(daysLeft);
       console.log(nums);
 
-      const intervalID = setInterval(() => {
+      const inc = () => {
         const num = nums.shift();
         if (!num) {
           clearInterval(intervalID);
-          
           fadeInTitle();
           return;
         }
 
         totalElem.innerHTML = num;
-      }, 30);
+      };
+
+      inc();
+
+      const intervalID = setInterval(inc, 30);
+    } else {
+      fadeInTitle();
     }
   };
+
+  function ToHome() {
+    console.log("To Home");
+    const bg = document.getElementById("bg");
+    const content = document.getElementById("content");
+
+    if (bg && content) {
+      bg.classList.add("animate-fade-out-1");
+      content.classList.add("animate-fade-out-.5");
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1000);
+    } else {
+      window.location.href = "/";
+    }
+  }
+
+  const home = document.getElementById("Home")
+  if (home){home.onclick = ToHome;}
 </script>
 
 <Basic title="Journal" description="Cataloging the harrowing journey">
+  <!-- Faux bg, behind for transitions -->
   <div
+    class="-z-20 main-bg fixed w-screen h-screen flex justify-center items-center"
+  >
+  </div>
+
+  <!-- Background -->
+  <div
+    id="bg"
     class="-z-10 journal-bg fixed w-screen h-screen flex justify-center items-center"
   >
     <h1
       class="animate-fade-in-.5 text-center text-opacity-20 max-w-full text-8xl sm:text-[min(25vw,50vh)] text-white leading-none pb-0 dm-sans font-extralight"
     >
-      <div class="block"><span id="days">27</span> DAYS UNTIL</div>
+      <div class="block">
+        <span id="days"></span> 
+        <span id="restOfTitle">DAYS UNTIL</span> 
+      </div>
     </h1>
   </div>
 
   <NavBar buttons={["Home"]} />
 
   <div
+    id="content"
     class="min-w-screen min-h-screen flex flex-col justify-center items-center text-black px-5 sm:px-10 new-ams"
   >
     <div class="w-full md:w-3/4">
+      <!-- Title -->
       <div class="opacity-0 bring-in flex flex-col justify-end h-screen" id="title-s">
         <div class="flex flex-row items-center h-20 mb-[-2.5rem]">
           <div
@@ -82,6 +143,8 @@ const entries = await Astro.glob("./*.md");
           class="ml-10 h-[50vh] w-1 bg-white"
         ></div>
       </div>
+
+      <!-- Entries -->
       {entries.map((entry) =>
         <div class="h-20 pl-10 flex">
           <div
@@ -96,4 +159,5 @@ const entries = await Astro.glob("./*.md");
       )}
     </div>
   </div>
+  <Footer />
 </Basic>
