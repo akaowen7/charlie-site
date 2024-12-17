@@ -13,6 +13,7 @@ import CharMug from "../assets/C-3.jpg";
 import CharYears from "../assets/C-4.jpg";
 
 import { GET } from "../pages/api/donation-total.json.ts";
+import Footer from "@components/Footer.astro";
 
 let response = await GET(Astro);
 const total = (await response.json()).total;
@@ -116,8 +117,6 @@ const total = (await response.json()).total;
 
   document.getElementById("Journal").onclick = ToJournal;
 </script>
-
-<script></script>
 
 <Basic title="Charlie Needs Help" description="Charlie Needs Help">
   <!-- Faux bg, behind for transitions -->
@@ -234,4 +233,5 @@ const total = (await response.json()).total;
       </Block>
     </div>
   </div>
+  <Footer />
 </Basic>

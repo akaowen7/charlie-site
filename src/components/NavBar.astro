@@ -7,13 +7,13 @@ const { buttons } = Astro.props;
 ---
 
 <div
-  class="bg-black bg-opacity-20 fixed right-0 h-screen flex flex-col justify-center items-center"
+  class="z-10 bg-black bg-opacity-20 fixed top-0 md:right-0 w-screen h-auto md:w-auto md:h-screen flex flex-row md:flex-col justify-center items-center"
   id="nav"
 >
   {
     buttons.map((button) => (
       <button
-        class="[writing-mode:vertical-rl] new-ams text-4xl bg-black p-3 m-3 rounded-lg
+        class="md:[writing-mode:vertical-rl] new-ams text-3xl md:text-4xl bg-black p-2 md:p-3 m-2 md:m-3 rounded-lg
         transition duration-300 ease-in-out bg-opacity-0 hover:bg-opacity-80"
         id={button}
       >
