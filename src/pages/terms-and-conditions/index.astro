@@ -1,28 +1,27 @@
 ---
+import Footer from "@components/Footer.astro";
 import Basic from "@layouts/Basic.astro";
 ---
 
 <Basic title="Terms and Conditions" description="Terms and Conditions">
-  <div
-    class="main-bg w-screen h-screen flex flex-col justify-center items-center text-white p-5"
-  >
-    <h1 class="new-ams text-3xl sm:text-4xl text-center mb-3">
-      TERMS AND CONDITIONS
-    </h1>
-    <p class="new-ams text-xl sm:text-2xl text-left sm:text-center">
-      - If Charlie picks vaping back up in February, refunds will be made<br />
-      - Otherwise absolutely no refunds, don't bet what you can't lose. It's for
-      charity afterall<br />
-      - minimum $5 donation, and preferably rounded dollars for accounting reasons<br
-      />
-      - Charlie has put in his own 20$ regardless for the charity<br />
-      - any complications can be discussed with Charlie if not stated here!
-    </p>
+  <div class="main-bg w-screen h-screen flex flex-col text-white">
+    <div class="flex-grow flex flex-col justify-center align-middle p-5">
+      <h1 class="new-ams text-3xl sm:text-4xl text-center mb-3">
+        TERMS AND CONDITIONS
+      </h1>
+      <p class="new-ams text-xl sm:text-2xl text-left sm:text-center">
+        - If Charlie picks vaping back up in February, refunds will be made<br
+        />
+        - Otherwise absolutely no refunds, don't bet what you can't lose. It's for
+        charity afterall<br />
+        - minimum $5 donation, and preferably rounded dollars for accounting reasons<br
+        />
+        - Charlie has put in his own 20$ regardless for the charity<br />
+        - any complications can be discussed with Charlie if not stated here!
+      </p>
+    </div>
+    <div class="justify-self-end">
+      <Footer />
+    </div>
   </div>
 </Basic>
-
-<style>
-  .main-bg {
-    background: radial-gradient(#292929, #0c0c0c);
-  }
-</style>

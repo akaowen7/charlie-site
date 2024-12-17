@@ -1,0 +1,29 @@
+---
+import Footer from "@components/Footer.astro";
+import Basic from "@layouts/Basic.astro";
+---
+
+<Basic title="About" description="about">
+  <div class="journal-bg w-screen h-screen flex flex-col text-white">
+    <div
+      class="flex-grow flex flex-col justify-center align-middle new-ams p-5"
+    >
+      <p class="text-xl sm:text-2xl text-left sm:text-center">
+        Content by charlie <br />
+        Website by thea <br />
+        photos by sabine <br />
+        <a
+          href="https://github.com/akaowen7/charlie-site"
+          class="text-blue-400 no-underline hover:underline"
+        >
+          github
+        </a>
+        <br />
+        2024
+      </p>
+    </div>
+    <div class="justify-self-end">
+      <Footer />
+    </div>
+  </div>
+</Basic>

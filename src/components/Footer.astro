@@ -1,0 +1,33 @@
+---
+const links = [
+  {
+    name: "Home",
+    url: "/",
+  },
+  {
+    name: "Journal",
+    url: "/journal",
+  },
+  {
+    name: "Terms and Conditions",
+    url: "/terms-and-conditions",
+  },
+  {
+    name: "About",
+    url: "/about",
+  },
+];
+---
+
+<footer class="flex flex-row justify-center items-center gap-4 p-4">
+  {
+    links.map((link) => (
+      <a
+        href={link.url}
+        class="dm-sans font-medium text-white opacity-40 hover:opacity-80"
+      >
+        {link.name}
+      </a>
+    ))
+  }
+</footer>

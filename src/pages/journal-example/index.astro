@@ -3,9 +3,8 @@ import Basic from "@layouts/Basic.astro";
 import NavBar from "@components/NavBar.astro";
 
 import "@styles/markdown.css";
-import Footer from "@components/Footer.astro";
 
-const entries = await Astro.glob("../../assets/journal-entries/*.md");
+const entries = await Astro.glob("./*.md");
 ---
 
 <script>
@@ -52,37 +51,10 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
       }, 30);
     }
   };
-
-  function ToJournal() {
-    const bg = document.getElementById("bg");
-    const content = document.getElementById("content");
-
-    if (bg && content) {
-      bg.classList.add("animate-fade-out-1");
-      content.classList.add("animate-fade-out-.5");
-
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 1000);
-    } else {
-      window.location.href = "/";
-    }
-  }
-
-  const home = document.getElementById("Home")
-  if (home){home.onclick = ToJournal;}
 </script>
 
 <Basic title="Journal" description="Cataloging the harrowing journey">
-  <!-- Faux bg, behind for transitions -->
   <div
-    class="-z-20 main-bg fixed w-screen h-screen flex justify-center items-center"
-  >
-  </div>
-
-  <!-- Background -->
-  <div
-    id="bg"
     class="-z-10 journal-bg fixed w-screen h-screen flex justify-center items-center"
   >
     <h1
@@ -95,11 +67,9 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
   <NavBar buttons={["Home"]} />
 
   <div
-    id="content"
     class="min-w-screen min-h-screen flex flex-col justify-center items-center text-black px-5 sm:px-10 new-ams"
   >
     <div class="w-full md:w-3/4">
-      <!-- Title -->
       <div class="opacity-0 bring-in flex flex-col justify-end h-screen" id="title-s">
         <div class="flex flex-row items-center h-20 mb-[-2.5rem]">
           <div
@@ -112,8 +82,6 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
           class="ml-10 h-[50vh] w-1 bg-white"
         ></div>
       </div>
-
-      <!-- Entries -->
       {entries.map((entry) =>
         <div class="h-20 pl-10 flex">
           <div
@@ -128,5 +96,4 @@ const entries = await Astro.glob("../../assets/journal-entries/*.md");
       )}
     </div>
   </div>
-  <Footer />
 </Basic>
